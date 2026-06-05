@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shopping Cart</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f5f5;
+    margin:0;
+    padding:40px;
+}
+
+.cart-box{
+    max-width:700px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 0 15px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+}
+
+.product{
+    display:flex;
+    justify-content:space-between;
+    padding:15px 0;
+    border-bottom:1px solid #ddd;
+}
+
+.checkout-btn{
+    display:block;
+    width:100%;
+    background:#41d63b;
+    color:white;
+    text-decoration:none;
+    text-align:center;
+    padding:15px;
+    border-radius:10px;
+    margin-top:25px;
+    font-size:18px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="cart-box">
+
+<h1>Your Cart</h1>
+<div class="product"></div>
+
+<p style="text-align:right;font-size:22px;">
+<strong>Total: <span id="totalPrice"></span></strong>
+</p>
+<a href="checkoutdeepwave.html" class="checkout-btn">
+Proceed to Checkout
+</a>
+
+</div>
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let productHTML = "";
+let total = 0;
+
+cart.forEach(item => {
+    productHTML += `
+        <div class="product">
+            <span>${item.name}</span>
+            <span>$${item.price}</span>
+        </div>
+    `;
+
+    total += item.price;
+});
+
+document.querySelector(".product").innerHTML = productHTML;
+
+document.getElementById("totalPrice").innerText = "$" + total;
+</script>
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Checkout</title>
+
+<style>
+body{
+    font-family:Arial, sans-serif;
+    background:#f5f5f5;
+    text-align:center;
+    padding:40px;
+}
+
+.checkout-box{
+    background:white;
+    max-width:500px;
+    margin:auto;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 0 15px rgba(0,0,0,0.1);
+}
+
+.paypal{
+    background:#ffc439;
+    color:black;
+    border:none;
+    padding:15px 40px;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+    margin:10px;
+}
+
+.opay{
+    background:green;
+    color:white;
+    border:none;
+    padding:15px 40px;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+    margin:10px;
+}
+
+.input{
+    width:90%;
+    padding:150px;
+    margin:30px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:100px;
+}
+
+</style>
+
+</head>
+
+<body><h2>Shipping Information</h2>
+
+<form>
+
+<label>Full Name</label><br><br>
+<input type="text" placeholder="Full Name" required><br><br>
+
+<input type="email" placeholder="Email Address" required><br><br>
+
+<input type="tel" placeholder="Phone Number" required><br><br>
+
+<input type="text" placeholder="Country" required><br><br>
+
+<input type="text" placeholder="State" required><br><br>
+
+<input type="text" placeholder="City" required><br><br>
+
+<input type="text" placeholder="Street Address" required><br><br>
+
+<input type="text" placeholder="Postal Code" required><br><br>
+
+
+</form>
+</form>
+
+<div class="checkout-box">
+
+<h1>Checkout</h1>
+
+<h3>Order Summary</h3>
+<hr>
+
+<h2 id="checkoutProduct"></h2>
+
+<p>Subtotal: <span id="checkoutPrice"></span></p>
+<p>Shipping: Free</p>
+<h3>Total: <span id="checkoutPrice2"></span></h3>
+
+<p>Please choose a payment method</p >
+
+<a id="paypalLink" href="#" target="_blank">
+    <button class="paypal">
+        Pay with PayPal
+    </button>
+</a>
+
+<button class="opay" onclick="showOpay()">
+    Pay with OPay
+</button>
+
+<div id="opayDetails" style="display:none; margin-top:20px;">
+
+    <img src="opaycode.jpg" width="200">
+
+    <p><strong>OPay Account:</strong> 8122994124</p >
+
+    <p><strong>Name:</strong> Stellae Ejidike</p >
+
+    <p>Please complete payment and send proof of payment.</p >
+<script>
+function showOpay() {
+    document.getElementById("opayDetails").style.display = "block";
+}
+</script>
+</div>
+
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let total = 0;
+let products = "";
+
+let quantity = cart.length;
+
+cart.forEach(item => {
+    total += item.price;
+});
+
+products = `
+<div style="font-size:22px;font-weight:bold;">
+   Stright blonde wig × ${quantity}
+</div>
+`;
+
+document.getElementById("checkoutProduct").innerHTML = products;
+
+document.getElementById("checkoutPrice").innerText = "$" + total;
+document.getElementById("checkoutPrice2").innerText = "$" + total;
+
+// Update PayPal link automatically
+document.getElementById("paypalLink").href =
+    "https://paypal.me/Stellaelara/" + total;
+    localStorage.clear();
+</script>
+</body>
+</html>
